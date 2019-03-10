@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +7,15 @@ public class EnemyPatrol : MonoBehaviour
 
     public float speed;
 
-    private bool movingRight = true;
-
     public Transform groundDetection;
 
     public float rayDist;
+
+    private Vector3 distFromPlayer;
+    private Transform targetPos;
+
+    private bool facingRight;
+    private bool movingRight = true;
 
     private void Update()
     {
@@ -30,7 +34,14 @@ public class EnemyPatrol : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 0, 0);
                 movingRight = true;
             }
+        }
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject);
         }
     }
 }
