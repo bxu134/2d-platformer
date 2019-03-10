@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     private int extraJumps;
     public int extraJumpsValue;
+
+    private int Deaths;
 
     void Awake()
     {
@@ -78,6 +81,16 @@ public class PlayerController : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            Deaths = Deaths + 1;
+            Debug.Log("Deaths: " + Deaths);
+            transform.position = playerRespawn;
+        }
     }
 
 }
