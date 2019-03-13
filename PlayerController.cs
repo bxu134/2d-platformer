@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public int extraJumpsValue;
 
     private int Deaths;
+    public int maxHealth;
+    public int newHealth;
 
     void Awake()
     {
@@ -87,9 +89,16 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            Deaths = Deaths + 1;
-            Debug.Log("Deaths: " + Deaths);
-            transform.position = playerRespawn;
+            newHealth = newHealth - 1;
+            Debug.Log("Health: " + newHealth);
+            if (newHealth == 0)
+            {
+                Deaths = Deaths + 1;
+                newHealth = maxHealth;
+                transform.position = playerRespawn;
+                Debug.Log("Deaths: " + Deaths);
+                Debug.Log("Health: " + newHealth);
+            }
         }
     }
 
