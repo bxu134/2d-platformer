@@ -21,6 +21,8 @@ public class EnemyPatrol : MonoBehaviour
 
     public GameObject Player;
 
+    private bool isGrounded;
+
     private void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
@@ -43,22 +45,6 @@ public class EnemyPatrol : MonoBehaviour
         else
         {
             lastDirRight = movingRight;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision) 
-    //while enemy is moving right and facing right and collides w/ player, enemy will switch sides
-    //while enemy is moving left and facing left and colldies w/ player, enemy will not switch sides
-    {
-        if (facingRight = true && collision.gameObject.tag == "Player")
-        {
-            transform.eulerAngles = new Vector3(0, -180, 0); 
-            movingRight = false;
-        }
-        else
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-            movingRight = true;
         }
 
     }
